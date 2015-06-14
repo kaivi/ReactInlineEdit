@@ -1,6 +1,6 @@
 {
   "name": "react-edit-inline",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple inline text editor for React with ECMAScript 6 + JSX Harmony syntax",
   "main": "index.js",
   "scripts": {
