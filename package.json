@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kaivi/EditableInlineText.git"
+    "url": "git+https://github.com/kaivi/ReactInlineEdit.git"
   },
   "keywords": [
     "react",
@@ -21,9 +21,9 @@
   "author": "Kai Vik <kvi@ieee.org>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kaivi/EditableInlineText/issues"
+    "url": "https://github.com/kaivi/ReactInlineEdit/issues"
   },
-  "homepage": "https://github.com/kaivi/EditableInlineText#readme",
+  "homepage": "https://github.com/kaivi/ReactInlineEdit#readme",
   "dependencies": {
     "react": "^0.13.3"
   }
