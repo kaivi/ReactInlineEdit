@@ -1,5 +1,5 @@
 # Inline Edit Component for React
-Simple React component for in-place text editing. It turns into an `<input />` when disturbed, and tries to validate and save input on <kbd>Enter</kbd> or `blur`. <kbd>Esc</kbd> works as well for cancelling. Use it with [Babel](https://babeljs.io/) because of ECMAScript 6 and JSX Harmony.
+Simple React component for in-place text editing. It turns into an `<input />` when disturbed, and tries to validate and save input on <kbd>Enter</kbd> or `blur`. <kbd>Esc</kbd> works as well for cancelling.
 
 ![Example animation gif](http://i.imgur.com/8vig5m1.gif)
 
