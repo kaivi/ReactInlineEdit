@@ -1,0 +1,30 @@
+{
+  "name": "react-inline-edit",
+  "version": "1.0.0",
+  "description": "A simple inline text editor for React with ECMAScript 6 + JSX Harmony syntax",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaivi/EditableInlineText.git"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "editor",
+    "inline",
+    "input",
+    "form"
+  ],
+  "author": "Kai Vik <kvi@ieee.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kaivi/EditableInlineText/issues"
+  },
+  "homepage": "https://github.com/kaivi/EditableInlineText#readme",
+  "dependencies": {
+    "react": "^0.13.3"
+  }
+}
