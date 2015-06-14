@@ -5,7 +5,7 @@ Simple React component for in-place text editing. It turns into an `<input />` w
 
 ### Installation
 
-`npm install react-inline-edit --save-dev`
+`npm install react-edit-inline --save-dev`
 
 ### Required props
 - `text`:`string` initial text
@@ -21,7 +21,7 @@ Simple React component for in-place text editing. It turns into an `<input />` w
 ### Usage example
 ```javascript
 import React from 'react';
-import InlineEdit from 'react-inline-edit';
+import InlineEdit from 'react-edit-inline';
 
 class MyParentComponent extends React.Component {
     constructor(props) {
