@@ -110,7 +110,7 @@ var InlineEdit = (function (_React$Component) {
             if (!this.state.editing) {
                 return _react2["default"].createElement(
                     "span",
-                    { onClick: this.startEditing },
+                    { className: this.props.className, onClick: this.startEditing },
                     this.props.text
                 );
             } else {

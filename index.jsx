@@ -76,7 +76,7 @@ class InlineEdit extends React.Component {
 
     render() {
         if(!this.state.editing) {
-            return <span onClick={this.startEditing}>{this.props.text}</span>
+            return <span className={this.props.className} onClick={this.startEditing}>{this.props.text}</span>
         } else {
             return <input className={this.props.activeClassName} onKeyDown={this.keyDown} onBlur={this.finishEditing} ref="input" defaultValue={this.state.text} onChange={this.textChanged} onReturn={this.finishEditing} />
         }

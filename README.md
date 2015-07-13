@@ -13,7 +13,8 @@ Simple React component for in-place text editing. It turns into an `<input />` w
 - `change`:`function` function to call when new text is changed and validated, it will receive `{paramName: value}`
 
 ### Optional props
-- `activeClassName`:`string` class to apply when in edit mode
+- `className`:`string` CSS class name
+- `activeClassName`:`string` CSS class replacement for when in edit mode
 - `validate`:`function` boolean function for custom validation, using this overrides the two props below
 - `minLength`:`number` minimum text length, **default** `1`
 - `maxLength`:`number` maximum text length, **default** `256`
