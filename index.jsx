@@ -15,7 +15,7 @@ class InlineEdit extends React.Component {
         this.commitEditing = this.commitEditing.bind(this);
         this.keyDown = this.keyDown.bind(this);
         this.state = {
-            editing: false,
+            editing: this.props.editing || false,
             text: this.props.text,
             minLength: this.props.minLength || 1,
             maxLength: this.props.maxLength || 256
@@ -90,7 +90,8 @@ InlineEdit.propTypes = {
     activeClassName: React.PropTypes.string,
     minLength: React.PropTypes.number,
     maxLength: React.PropTypes.number,
-    validate: React.PropTypes.func
+    validate: React.PropTypes.func,
+    editing: React.PropTypes.bool
 };
 
 export default InlineEdit;
