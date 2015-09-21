@@ -114,7 +114,8 @@ var InlineEdit = (function (_React$Component) {
                     this.props.text
                 );
             } else {
-                return _react2["default"].createElement("input", { className: this.props.activeClassName, onKeyDown: this.keyDown, onBlur: this.finishEditing, ref: "input", defaultValue: this.state.text, onChange: this.textChanged, onReturn: this.finishEditing });
+                var Element = this.props.element || "input";
+                return _react2["default"].createElement(Element, { className: this.props.activeClassName, onKeyDown: this.keyDown, onBlur: this.finishEditing, ref: "input", defaultValue: this.state.text, onChange: this.textChanged, onReturn: this.finishEditing });
             }
         }
     }]);
@@ -129,7 +130,8 @@ InlineEdit.propTypes = {
     activeClassName: _react2["default"].PropTypes.string,
     minLength: _react2["default"].PropTypes.number,
     maxLength: _react2["default"].PropTypes.number,
-    validate: _react2["default"].PropTypes.func
+    validate: _react2["default"].PropTypes.func,
+    element: _react2["default"].PropTypes.string
 };
 
 exports["default"] = InlineEdit;
