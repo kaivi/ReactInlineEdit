@@ -114,11 +114,8 @@ var InlineEdit = (function (_React$Component) {
                     this.props.text
                 );
             } else {
-                if (this.props.element === 'textarea') {
-                    return _react2["default"].createElement("textarea", { className: this.props.activeClassName, onKeyDown: this.keyDown, onBlur: this.finishEditing, ref: "input", defaultValue: this.state.text, onChange: this.textChanged, onReturn: this.finishEditing });
-                }
-
-                return _react2["default"].createElement("input", { className: this.props.activeClassName, onKeyDown: this.keyDown, onBlur: this.finishEditing, ref: "input", defaultValue: this.state.text, onChange: this.textChanged, onReturn: this.finishEditing });
+                var Element = this.props.element || "input";
+                return _react2["default"].createElement(Element, { className: this.props.activeClassName, onKeyDown: this.keyDown, onBlur: this.finishEditing, ref: "input", defaultValue: this.state.text, onChange: this.textChanged, onReturn: this.finishEditing });
             }
         }
     }]);
