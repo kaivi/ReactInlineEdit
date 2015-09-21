@@ -114,7 +114,7 @@ var InlineEdit = (function (_React$Component) {
                     this.props.text
                 );
             } else {
-                return _react2["default"].createElement("input", { className: this.props.activeClassName, onKeyDown: this.keyDown, onBlur: this.finishEditing, ref: "input", defaultValue: this.state.text, onChange: this.textChanged, onReturn: this.finishEditing });
+                return _react2["default"].createElement("textarea", { className: this.props.activeClassName, onKeyDown: this.keyDown, onBlur: this.finishEditing, ref: "input", defaultValue: this.state.text, onChange: this.textChanged, onReturn: this.finishEditing });
             }
         }
     }]);
