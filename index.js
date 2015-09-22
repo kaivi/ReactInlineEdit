@@ -111,11 +111,11 @@ var InlineEdit = (function (_React$Component) {
                 return _react2["default"].createElement(
                     "span",
                     { className: this.props.className, onClick: this.startEditing },
-                    this.props.text
+                    this.state.text || this.props.placeholder
                 );
             } else {
                 var Element = this.props.element || "input";
-                return _react2["default"].createElement(Element, { className: this.props.activeClassName, onKeyDown: this.keyDown, onBlur: this.finishEditing, ref: "input", defaultValue: this.state.text, onChange: this.textChanged, onReturn: this.finishEditing });
+                return _react2["default"].createElement(Element, { className: this.props.activeClassName, onKeyDown: this.keyDown, onBlur: this.finishEditing, ref: "input", placeholder: this.props.placeholder, defaultValue: this.state.text, onChange: this.textChanged, onReturn: this.finishEditing });
             }
         }
     }]);
@@ -127,6 +127,7 @@ InlineEdit.propTypes = {
     text: _react2["default"].PropTypes.string.isRequired,
     paramName: _react2["default"].PropTypes.string.isRequired,
     change: _react2["default"].PropTypes.func.isRequired,
+    placeholder: _react2["default"].PropTypes.string,
     activeClassName: _react2["default"].PropTypes.string,
     minLength: _react2["default"].PropTypes.number,
     maxLength: _react2["default"].PropTypes.number,
