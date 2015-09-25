@@ -18,6 +18,10 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require("react-dom");
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 function SelectInputText(element) {
     element.setSelectionRange(0, element.value.length);
 }
@@ -96,7 +100,7 @@ var InlineEdit = (function (_React$Component) {
     }, {
         key: "componentDidUpdate",
         value: function componentDidUpdate(prevProps, prevState) {
-            var inputElem = _react2["default"].findDOMNode(this.refs.input);
+            var inputElem = _reactDom2['default'].findDOMNode(this.refs.input);
             if (this.state.editing && !prevState.editing) {
                 inputElem.focus();
                 SelectInputText(inputElem);

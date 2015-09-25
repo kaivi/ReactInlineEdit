@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 function SelectInputText(element) {
     element.setSelectionRange(0, element.value.length);
@@ -65,7 +66,7 @@ class InlineEdit extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        var inputElem = React.findDOMNode(this.refs.input);
+        var inputElem = ReactDOM.findDOMNode(this.refs.input);
         if (this.state.editing && !prevState.editing) {
             inputElem.focus();
             SelectInputText(inputElem);
