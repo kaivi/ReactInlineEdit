@@ -100,7 +100,7 @@ var InlineEdit = (function (_React$Component) {
     }, {
         key: "componentDidUpdate",
         value: function componentDidUpdate(prevProps, prevState) {
-            var inputElem = _reactDom2['default'].findDOMNode(this.refs.input);
+            var inputElem = _reactDom2["default"].findDOMNode(this.refs.input);
             if (this.state.editing && !prevState.editing) {
                 inputElem.focus();
                 SelectInputText(inputElem);
