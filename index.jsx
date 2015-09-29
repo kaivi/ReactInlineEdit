@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 function SelectInputText(element) {
     element.setSelectionRange(0, element.value.length);
@@ -65,7 +66,7 @@ class InlineEdit extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        var inputElem = React.findDOMNode(this.refs.input);
+        var inputElem = ReactDOM.findDOMNode(this.refs.input);
         if (this.state.editing && !prevState.editing) {
             inputElem.focus();
             SelectInputText(inputElem);
@@ -76,9 +77,10 @@ class InlineEdit extends React.Component {
 
     render() {
         if(!this.state.editing) {
-            return <span className={this.props.className} onClick={this.startEditing}>{this.props.text}</span>
+            return <span className={this.props.className} onClick={this.startEditing}>{this.state.text || this.props.placeholder}</span>
         } else {
-            return <input className={this.props.activeClassName} onKeyDown={this.keyDown} onBlur={this.finishEditing} ref="input" defaultValue={this.state.text} onChange={this.textChanged} onReturn={this.finishEditing} />
+            const Element = this.props.element || 'input';
+            return <Element className={this.props.activeClassName} onKeyDown={this.keyDown} onBlur={this.finishEditing} ref="input" placeholder={this.props.placeholder} defaultValue={this.state.text} onChange={this.textChanged} onReturn={this.finishEditing} />
         }
     }
 }
@@ -87,10 +89,12 @@ InlineEdit.propTypes = {
     text: React.PropTypes.string.isRequired,
     paramName: React.PropTypes.string.isRequired,
     change: React.PropTypes.func.isRequired,
+    placeholder: React.PropTypes.string,
     activeClassName: React.PropTypes.string,
     minLength: React.PropTypes.number,
     maxLength: React.PropTypes.number,
-    validate: React.PropTypes.func
+    validate: React.PropTypes.func,
+    element: React.PropTypes.string
 };
 
 export default InlineEdit;

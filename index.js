@@ -18,6 +18,10 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require("react-dom");
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 function SelectInputText(element) {
     element.setSelectionRange(0, element.value.length);
 }
@@ -96,7 +100,7 @@ var InlineEdit = (function (_React$Component) {
     }, {
         key: "componentDidUpdate",
         value: function componentDidUpdate(prevProps, prevState) {
-            var inputElem = _react2["default"].findDOMNode(this.refs.input);
+            var inputElem = _reactDom2["default"].findDOMNode(this.refs.input);
             if (this.state.editing && !prevState.editing) {
                 inputElem.focus();
                 SelectInputText(inputElem);
@@ -111,10 +115,11 @@ var InlineEdit = (function (_React$Component) {
                 return _react2["default"].createElement(
                     "span",
                     { className: this.props.className, onClick: this.startEditing },
-                    this.props.text
+                    this.state.text || this.props.placeholder
                 );
             } else {
-                return _react2["default"].createElement("input", { className: this.props.activeClassName, onKeyDown: this.keyDown, onBlur: this.finishEditing, ref: "input", defaultValue: this.state.text, onChange: this.textChanged, onReturn: this.finishEditing });
+                var Element = this.props.element || "input";
+                return _react2["default"].createElement(Element, { className: this.props.activeClassName, onKeyDown: this.keyDown, onBlur: this.finishEditing, ref: "input", placeholder: this.props.placeholder, defaultValue: this.state.text, onChange: this.textChanged, onReturn: this.finishEditing });
             }
         }
     }]);
@@ -126,10 +131,12 @@ InlineEdit.propTypes = {
     text: _react2["default"].PropTypes.string.isRequired,
     paramName: _react2["default"].PropTypes.string.isRequired,
     change: _react2["default"].PropTypes.func.isRequired,
+    placeholder: _react2["default"].PropTypes.string,
     activeClassName: _react2["default"].PropTypes.string,
     minLength: _react2["default"].PropTypes.number,
     maxLength: _react2["default"].PropTypes.number,
-    validate: _react2["default"].PropTypes.func
+    validate: _react2["default"].PropTypes.func,
+    element: _react2["default"].PropTypes.string
 };
 
 exports["default"] = InlineEdit;

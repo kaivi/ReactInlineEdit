@@ -24,7 +24,7 @@
     "url": "https://github.com/kaivi/ReactInlineEdit/issues"
   },
   "homepage": "https://github.com/kaivi/ReactInlineEdit#readme",
-  "dependencies": {
-    "react": "^0.13.3"
+  "peerDependencies": {
+    "react": ">=0.13.3 || 0.14.0-rc1"
   }
 }
