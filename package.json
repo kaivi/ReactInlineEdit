@@ -1,10 +1,12 @@
 {
   "name": "react-edit-inline",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A simple inline text editor for React with ECMAScript 6 + JSX Harmony syntax",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -f index.js; babel --stage 0 index.jsx --out-file index.js",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
