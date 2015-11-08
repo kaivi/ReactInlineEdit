@@ -66,7 +66,7 @@ class InlineEdit extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        var inputElem = ReactDOM.findDOMNode(this.refs.input);
+        var inputElem = React.findDOMNode(this.refs.input);
         if (this.state.editing && !prevState.editing) {
             inputElem.focus();
             SelectInputText(inputElem);
