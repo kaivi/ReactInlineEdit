@@ -77,10 +77,10 @@ class InlineEdit extends React.Component {
 
     render() {
         if(!this.state.editing) {
-            return <span className={this.props.className} onClick={this.startEditing}>{this.state.text || this.props.placeholder}</span>
+            return <span style={this.props.style} className={this.props.className} onClick={this.startEditing}>{this.state.text || this.props.placeholder}</span>
         } else {
             const Element = this.props.element || 'input';
-            return <Element className={this.props.activeClassName} onKeyDown={this.keyDown} onBlur={this.finishEditing} ref="input" placeholder={this.props.placeholder} defaultValue={this.state.text} onChange={this.textChanged} onReturn={this.finishEditing} />
+            return <Element style={this.props.activeStyle} className={this.props.activeClassName} onKeyDown={this.keyDown} onBlur={this.finishEditing} ref="input" placeholder={this.props.placeholder} defaultValue={this.state.text} onChange={this.textChanged} onReturn={this.finishEditing} />
         }
     }
 }
@@ -90,6 +90,9 @@ InlineEdit.propTypes = {
     paramName: React.PropTypes.string.isRequired,
     change: React.PropTypes.func.isRequired,
     placeholder: React.PropTypes.string,
+    style: React.PropTypes.object,
+    activeStyle: React.PropTypes.object,
+    className: React.PropTypes.string,
     activeClassName: React.PropTypes.string,
     minLength: React.PropTypes.number,
     maxLength: React.PropTypes.number,
