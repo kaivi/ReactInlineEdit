@@ -134,6 +134,7 @@ InlineEdit.propTypes = {
     placeholder: _react2['default'].PropTypes.string,
     style: _react2['default'].PropTypes.object,
     activeStyle: _react2['default'].PropTypes.object,
+    className: _react2['default'].PropTypes.string,
     activeClassName: _react2['default'].PropTypes.string,
     minLength: _react2['default'].PropTypes.number,
     maxLength: _react2['default'].PropTypes.number,

@@ -92,6 +92,7 @@ InlineEdit.propTypes = {
     placeholder: React.PropTypes.string,
     style: React.PropTypes.object,
     activeStyle: React.PropTypes.object,
+    className: React.PropTypes.string,
     activeClassName: React.PropTypes.string,
     minLength: React.PropTypes.number,
     maxLength: React.PropTypes.number,
