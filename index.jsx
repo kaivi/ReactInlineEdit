@@ -75,6 +75,12 @@ class InlineEdit extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.text !== this.state.text) {
+            this.setState({ text: nextProps.text });
+        }
+    }
+
     render() {
         if(!this.state.editing) {
             return <span className={this.props.className} onClick={this.startEditing}>{this.state.text || this.props.placeholder}</span>
