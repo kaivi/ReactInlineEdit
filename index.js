@@ -114,12 +114,12 @@ var InlineEdit = (function (_React$Component) {
             if (!this.state.editing) {
                 return _react2['default'].createElement(
                     'span',
-                    { className: this.props.className, onClick: this.startEditing },
+                    { style: this.props.style, className: this.props.className, onClick: this.startEditing },
                     this.state.text || this.props.placeholder
                 );
             } else {
                 var _Element = this.props.element || 'input';
-                return _react2['default'].createElement(_Element, { className: this.props.activeClassName, onKeyDown: this.keyDown, onBlur: this.finishEditing, ref: 'input', placeholder: this.props.placeholder, defaultValue: this.state.text, onChange: this.textChanged, onReturn: this.finishEditing });
+                return _react2['default'].createElement(_Element, { style: this.props.activeStyle, className: this.props.activeClassName, onKeyDown: this.keyDown, onBlur: this.finishEditing, ref: 'input', placeholder: this.props.placeholder, defaultValue: this.state.text, onChange: this.textChanged, onReturn: this.finishEditing });
             }
         }
     }]);
@@ -132,6 +132,8 @@ InlineEdit.propTypes = {
     paramName: _react2['default'].PropTypes.string.isRequired,
     change: _react2['default'].PropTypes.func.isRequired,
     placeholder: _react2['default'].PropTypes.string,
+    style: _react2['default'].PropTypes.object,
+    activeStyle: _react2['default'].PropTypes.object,
     activeClassName: _react2['default'].PropTypes.string,
     minLength: _react2['default'].PropTypes.number,
     maxLength: _react2['default'].PropTypes.number,
