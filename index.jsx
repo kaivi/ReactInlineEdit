@@ -65,6 +65,12 @@ class InlineEdit extends React.Component {
         })
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.text !== this.state.text) {
+            this.setState({ text: nextProps.text });
+        }
+    }
+
     componentDidUpdate(prevProps, prevState) {
         var inputElem = ReactDOM.findDOMNode(this.refs.input);
         if (this.state.editing && !prevState.editing) {
@@ -72,12 +78,6 @@ class InlineEdit extends React.Component {
             SelectInputText(inputElem);
         } else if (this.state.editing && prevProps.text != this.props.text) {
             this.finishEditing();
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.text !== this.state.text) {
-            this.setState({ text: nextProps.text });
         }
     }
 
