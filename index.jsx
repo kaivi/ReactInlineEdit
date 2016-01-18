@@ -6,20 +6,6 @@ function selectInputText(element) {
 }
 
 export default class InlineEdit extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            editing: false,
-            text: this.props.text,
-            minLength: this.props.minLength || 1,
-            maxLength: this.props.maxLength || 256,
-        };
-        this.isInputValid = this.props.validate || this.isInputValid;
-
-        // Warn about deprecated elements
-        if (this.props.element) console.warn('`element` prop is deprecated: instead pass editingElement or staticElement to InlineEdit component');
-    }
-
     static propTypes = {
         text: React.PropTypes.string.isRequired,
         paramName: React.PropTypes.string.isRequired,
@@ -43,6 +29,37 @@ export default class InlineEdit extends React.Component {
         staticElement: 'span',
         tabIndex: 0,
     };
+
+    state = {
+        editing: false,
+        text: this.props.text,
+        minLength: this.props.minLength,
+        maxLength: this.props.maxLength,
+    };
+
+    componentWillMount() {
+        this.isInputValid = this.props.validate || this.isInputValid;
+        // Warn about deprecated elements
+        if (this.props.element) {
+            console.warn('`element` prop is deprecated: instead pass editingElement or staticElement to InlineEdit component');
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.text !== this.state.text) {
+            this.setState({ text: nextProps.text });
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        let inputElem = ReactDOM.findDOMNode(this.refs.input);
+        if (this.state.editing && !prevState.editing) {
+            inputElem.focus();
+            selectInputText(inputElem);
+        } else if (this.state.editing && prevProps.text != this.props.text) {
+            this.finishEditing();
+        }
+    }
 
     startEditing = () => {
         this.setState({editing: true, text: this.props.text});
@@ -84,22 +101,6 @@ export default class InlineEdit extends React.Component {
             text: event.target.value.trim()
         });
     };
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.text !== this.state.text) {
-            this.setState({ text: nextProps.text });
-        }
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        let inputElem = ReactDOM.findDOMNode(this.refs.input);
-        if (this.state.editing && !prevState.editing) {
-            inputElem.focus();
-            selectInputText(inputElem);
-        } else if (this.state.editing && prevProps.text != this.props.text) {
-            this.finishEditing();
-        }
-    }
 
     render() {
         if (!this.state.editing) {

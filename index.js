@@ -29,66 +29,62 @@ function selectInputText(element) {
 var InlineEdit = function (_React$Component) {
     _inherits(InlineEdit, _React$Component);
 
-    function InlineEdit(props) {
+    function InlineEdit() {
+        var _Object$getPrototypeO;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, InlineEdit);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(InlineEdit).call(this, props));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
 
-        _this.startEditing = function () {
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(InlineEdit)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+            editing: false,
+            text: _this.props.text,
+            minLength: _this.props.minLength,
+            maxLength: _this.props.maxLength
+        }, _this.startEditing = function () {
             _this.setState({ editing: true, text: _this.props.text });
-        };
-
-        _this.finishEditing = function () {
+        }, _this.finishEditing = function () {
             if (_this.isInputValid(_this.state.text) && _this.props.text != _this.state.text) {
                 _this.commitEditing();
             } else if (_this.props.text === _this.state.text || !_this.isInputValid(_this.state.text)) {
                 _this.cancelEditing();
             }
-        };
-
-        _this.cancelEditing = function () {
+        }, _this.cancelEditing = function () {
             _this.setState({ editing: false, text: _this.props.text });
-        };
-
-        _this.commitEditing = function () {
+        }, _this.commitEditing = function () {
             _this.setState({ editing: false, text: _this.state.text });
             var newProp = {};
             newProp[_this.props.paramName] = _this.state.text;
             _this.props.change(newProp);
-        };
-
-        _this.isInputValid = function (text) {
+        }, _this.isInputValid = function (text) {
             return text.length >= _this.state.minLength && text.length <= _this.state.maxLength;
-        };
-
-        _this.keyDown = function (event) {
+        }, _this.keyDown = function (event) {
             if (event.keyCode === 13) {
                 _this.finishEditing();
             } else if (event.keyCode === 27) {
                 _this.cancelEditing();
             }
-        };
-
-        _this.textChanged = function (event) {
+        }, _this.textChanged = function (event) {
             _this.setState({
                 text: event.target.value.trim()
             });
-        };
-
-        _this.state = {
-            editing: false,
-            text: _this.props.text,
-            minLength: _this.props.minLength || 1,
-            maxLength: _this.props.maxLength || 256
-        };
-        _this.isInputValid = _this.props.validate || _this.isInputValid;
-
-        // Warn about deprecated elements
-        if (_this.props.element) console.warn('`element` prop is deprecated: instead pass editingElement or staticElement to InlineEdit component');
-        return _this;
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(InlineEdit, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            this.isInputValid = this.props.validate || this.isInputValid;
+            // Warn about deprecated elements
+            if (this.props.element) {
+                console.warn('`element` prop is deprecated: instead pass editingElement or staticElement to InlineEdit component');
+            }
+        }
+    }, {
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
             if (nextProps.text !== this.state.text) {
