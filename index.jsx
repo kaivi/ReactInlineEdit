@@ -5,7 +5,7 @@ function SelectInputText(element) {
     element.setSelectionRange(0, element.value.length);
 }
 
-class InlineEdit extends React.Component {
+export default class InlineEdit extends React.Component {
     constructor(props) {
         super(props);
         this.startEditing = this.startEditing.bind(this);
@@ -22,7 +22,25 @@ class InlineEdit extends React.Component {
             maxLength: this.props.maxLength || 256
         };
         this.isInputValid = this.props.validate || this.isInputValid.bind(this);
+
+        // Warn about deprecated elements
+        if (this.props.element) console.warn('`element` prop is deprecated: instead pass editingElement or staticElement to InlineEdit component')
     }
+
+    static propTypes = {
+        text: React.PropTypes.string.isRequired,
+        paramName: React.PropTypes.string.isRequired,
+        change: React.PropTypes.func.isRequired,
+        placeholder: React.PropTypes.string,
+        activeClassName: React.PropTypes.string,
+        minLength: React.PropTypes.number,
+        maxLength: React.PropTypes.number,
+        validate: React.PropTypes.func,
+        style: React.PropTypes.object,
+        editingElement: React.PropTypes.string,
+        staticElement: React.PropTypes.string,
+        tabIndex: React.PropTypes.number
+    };
 
     startEditing() {
         this.setState({editing: true, text: this.props.text});
@@ -65,6 +83,12 @@ class InlineEdit extends React.Component {
         })
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.text !== this.state.text) {
+            this.setState({ text: nextProps.text });
+        }
+    }
+
     componentDidUpdate(prevProps, prevState) {
         var inputElem = ReactDOM.findDOMNode(this.refs.input);
         if (this.state.editing && !prevState.editing) {
@@ -77,24 +101,26 @@ class InlineEdit extends React.Component {
 
     render() {
         if(!this.state.editing) {
-            return <span className={this.props.className} onClick={this.startEditing}>{this.state.text || this.props.placeholder}</span>
+          const Element = this.props.element || this.props.staticElement || 'span';
+          return <Element
+            className={this.props.className}
+            onClick={this.startEditing}
+            tabIndex={this.props.tabIndex || 0}
+            style={this.props.style} >
+              {this.state.text || this.props.placeholder}
+          </Element>
         } else {
-            const Element = this.props.element || 'input';
-            return <Element className={this.props.activeClassName} onKeyDown={this.keyDown} onBlur={this.finishEditing} ref="input" placeholder={this.props.placeholder} defaultValue={this.state.text} onChange={this.textChanged} onReturn={this.finishEditing} />
+            const Element = this.props.element || this.props.editingElement || 'input';
+            return <Element
+              onKeyDown={this.keyDown}
+              onBlur={this.finishEditing}
+              className={this.props.activeClassName}
+              placeholder={this.props.placeholder}
+              defaultValue={this.state.text}
+              onReturn={this.finishEditing}
+              onChange={this.textChanged}
+              style={this.props.style}
+              ref="input" />
         }
     }
 }
-
-InlineEdit.propTypes = {
-    text: React.PropTypes.string.isRequired,
-    paramName: React.PropTypes.string.isRequired,
-    change: React.PropTypes.func.isRequired,
-    placeholder: React.PropTypes.string,
-    activeClassName: React.PropTypes.string,
-    minLength: React.PropTypes.number,
-    maxLength: React.PropTypes.number,
-    validate: React.PropTypes.func,
-    element: React.PropTypes.string
-};
-
-export default InlineEdit;
