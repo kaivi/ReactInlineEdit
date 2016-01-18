@@ -6,7 +6,7 @@ This is a simple React component for in-place text editing. It turns into an `<i
 
 ![Example animation gif](http://i.imgur.com/8vig5m1.gif)
 
-Watch a [demo](demo/index.html), then check out [demo/index.jsx](demo/index.jsx) for a quick example.
+Watch a [demo](https://cdn.rawgit.com/kaivi/ReactInlineEdit/master/demo/index.html), then check out [demo/index.jsx](demo/index.jsx) for a quick example.
 
 ### Installation
 
