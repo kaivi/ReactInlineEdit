@@ -22,7 +22,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function SelectInputText(element) {
+function selectInputText(element) {
     element.setSelectionRange(0, element.value.length);
 }
 
@@ -34,20 +34,54 @@ var InlineEdit = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(InlineEdit).call(this, props));
 
-        _this.startEditing = _this.startEditing.bind(_this);
-        _this.finishEditing = _this.finishEditing.bind(_this);
-        _this.textChanged = _this.textChanged.bind(_this);
-        _this.isInputValid = _this.isInputValid.bind(_this);
-        _this.componentDidUpdate = _this.componentDidUpdate.bind(_this);
-        _this.commitEditing = _this.commitEditing.bind(_this);
-        _this.keyDown = _this.keyDown.bind(_this);
+        _this.startEditing = function () {
+            _this.setState({ editing: true, text: _this.props.text });
+        };
+
+        _this.finishEditing = function () {
+            if (_this.isInputValid(_this.state.text) && _this.props.text != _this.state.text) {
+                _this.commitEditing();
+            } else if (_this.props.text === _this.state.text || !_this.isInputValid(_this.state.text)) {
+                _this.cancelEditing();
+            }
+        };
+
+        _this.cancelEditing = function () {
+            _this.setState({ editing: false, text: _this.props.text });
+        };
+
+        _this.commitEditing = function () {
+            _this.setState({ editing: false, text: _this.state.text });
+            var newProp = {};
+            newProp[_this.props.paramName] = _this.state.text;
+            _this.props.change(newProp);
+        };
+
+        _this.isInputValid = function (text) {
+            return text.length >= _this.state.minLength && text.length <= _this.state.maxLength;
+        };
+
+        _this.keyDown = function (event) {
+            if (event.keyCode === 13) {
+                _this.finishEditing();
+            } else if (event.keyCode === 27) {
+                _this.cancelEditing();
+            }
+        };
+
+        _this.textChanged = function (event) {
+            _this.setState({
+                text: event.target.value.trim()
+            });
+        };
+
         _this.state = {
             editing: false,
             text: _this.props.text,
             minLength: _this.props.minLength || 1,
             maxLength: _this.props.maxLength || 256
         };
-        _this.isInputValid = _this.props.validate || _this.isInputValid.bind(_this);
+        _this.isInputValid = _this.props.validate || _this.isInputValid;
 
         // Warn about deprecated elements
         if (_this.props.element) console.warn('`element` prop is deprecated: instead pass editingElement or staticElement to InlineEdit component');
@@ -55,54 +89,6 @@ var InlineEdit = function (_React$Component) {
     }
 
     _createClass(InlineEdit, [{
-        key: 'startEditing',
-        value: function startEditing() {
-            this.setState({ editing: true, text: this.props.text });
-        }
-    }, {
-        key: 'finishEditing',
-        value: function finishEditing() {
-            if (this.isInputValid(this.state.text) && this.props.text != this.state.text) {
-                this.commitEditing();
-            } else if (this.props.text === this.state.text || !this.isInputValid(this.state.text)) {
-                this.cancelEditing();
-            }
-        }
-    }, {
-        key: 'cancelEditing',
-        value: function cancelEditing() {
-            this.setState({ editing: false, text: this.props.text });
-        }
-    }, {
-        key: 'commitEditing',
-        value: function commitEditing() {
-            this.setState({ editing: false, text: this.state.text });
-            var newProp = {};
-            newProp[this.props.paramName] = this.state.text;
-            this.props.change(newProp);
-        }
-    }, {
-        key: 'isInputValid',
-        value: function isInputValid(text) {
-            return text.length >= this.state.minLength && text.length <= this.state.maxLength;
-        }
-    }, {
-        key: 'keyDown',
-        value: function keyDown(event) {
-            if (event.keyCode === 13) {
-                this.finishEditing();
-            } else if (event.keyCode === 27) {
-                this.cancelEditing();
-            }
-        }
-    }, {
-        key: 'textChanged',
-        value: function textChanged(event) {
-            this.setState({
-                text: event.target.value.trim()
-            });
-        }
-    }, {
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
             if (nextProps.text !== this.state.text) {
@@ -115,7 +101,7 @@ var InlineEdit = function (_React$Component) {
             var inputElem = _reactDom2.default.findDOMNode(this.refs.input);
             if (this.state.editing && !prevState.editing) {
                 inputElem.focus();
-                SelectInputText(inputElem);
+                selectInputText(inputElem);
             } else if (this.state.editing && prevProps.text != this.props.text) {
                 this.finishEditing();
             }
@@ -158,6 +144,7 @@ InlineEdit.propTypes = {
     paramName: _react2.default.PropTypes.string.isRequired,
     change: _react2.default.PropTypes.func.isRequired,
     placeholder: _react2.default.PropTypes.string,
+    className: _react2.default.PropTypes.string,
     activeClassName: _react2.default.PropTypes.string,
     minLength: _react2.default.PropTypes.number,
     maxLength: _react2.default.PropTypes.number,
@@ -166,5 +153,12 @@ InlineEdit.propTypes = {
     editingElement: _react2.default.PropTypes.string,
     staticElement: _react2.default.PropTypes.string,
     tabIndex: _react2.default.PropTypes.number
+};
+InlineEdit.defaultProps = {
+    minLength: 1,
+    maxLength: 256,
+    editingElement: 'input',
+    staticElement: 'span',
+    tabIndex: 0
 };
 exports.default = InlineEdit;
