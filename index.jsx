@@ -8,20 +8,13 @@ function selectInputText(element) {
 export default class InlineEdit extends React.Component {
     constructor(props) {
         super(props);
-        this.startEditing = this.startEditing.bind(this);
-        this.finishEditing = this.finishEditing.bind(this);
-        this.textChanged = this.textChanged.bind(this);
-        this.isInputValid = this.isInputValid.bind(this);
-        this.componentDidUpdate = this.componentDidUpdate.bind(this);
-        this.commitEditing = this.commitEditing.bind(this);
-        this.keyDown = this.keyDown.bind(this);
         this.state = {
             editing: false,
             text: this.props.text,
             minLength: this.props.minLength || 1,
             maxLength: this.props.maxLength || 256,
         };
-        this.isInputValid = this.props.validate || this.isInputValid.bind(this);
+        this.isInputValid = this.props.validate || this.isInputValid;
 
         // Warn about deprecated elements
         if (this.props.element) console.warn('`element` prop is deprecated: instead pass editingElement or staticElement to InlineEdit component');
@@ -49,48 +42,48 @@ export default class InlineEdit extends React.Component {
         editingElement: 'input',
         staticElement: 'span',
         tabIndex: 0,
-    }
+    };
 
-    startEditing() {
+    startEditing = () => {
         this.setState({editing: true, text: this.props.text});
-    }
+    };
 
-    finishEditing() {
+    finishEditing = () => {
         if (this.isInputValid(this.state.text) && this.props.text != this.state.text){
             this.commitEditing();
         } else if (this.props.text === this.state.text || !this.isInputValid(this.state.text)) {
             this.cancelEditing();
         }
-    }
+    };
 
-    cancelEditing() {
+    cancelEditing = () => {
         this.setState({editing: false, text: this.props.text});
-    }
+    };
 
-    commitEditing() {
+    commitEditing = () => {
         this.setState({editing: false, text: this.state.text});
         let newProp = {};
         newProp[this.props.paramName] = this.state.text;
         this.props.change(newProp);
-    }
+    };
 
-    isInputValid(text) {
+    isInputValid = (text) => {
         return (text.length >= this.state.minLength && text.length <= this.state.maxLength);
-    }
+    };
 
-    keyDown(event) {
+    keyDown = (event) => {
         if (event.keyCode === 13) {
             this.finishEditing();
         } else if (event.keyCode === 27) {
             this.cancelEditing();
         }
-    }
+    };
 
-    textChanged(event) {
+    textChanged = (event) => {
         this.setState({
             text: event.target.value.trim()
         });
-    }
+    };
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.text !== this.state.text) {
