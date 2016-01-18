@@ -32,6 +32,7 @@ export default class InlineEdit extends React.Component {
         paramName: React.PropTypes.string.isRequired,
         change: React.PropTypes.func.isRequired,
         placeholder: React.PropTypes.string,
+        className: React.PropTypes.string,
         activeClassName: React.PropTypes.string,
         minLength: React.PropTypes.number,
         maxLength: React.PropTypes.number,
@@ -41,6 +42,14 @@ export default class InlineEdit extends React.Component {
         staticElement: React.PropTypes.string,
         tabIndex: React.PropTypes.number,
     };
+
+    static defaultProps = {
+        minLength: 1,
+        maxLength: 256,
+        editingElement: 'input',
+        staticElement: 'span',
+        tabIndex: 0,
+    }
 
     startEditing() {
         this.setState({editing: true, text: this.props.text});
