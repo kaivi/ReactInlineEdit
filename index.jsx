@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function SelectInputText(element) {
+function selectInputText(element) {
     element.setSelectionRange(0, element.value.length);
 }
 
@@ -19,12 +19,12 @@ export default class InlineEdit extends React.Component {
             editing: false,
             text: this.props.text,
             minLength: this.props.minLength || 1,
-            maxLength: this.props.maxLength || 256
+            maxLength: this.props.maxLength || 256,
         };
         this.isInputValid = this.props.validate || this.isInputValid.bind(this);
 
         // Warn about deprecated elements
-        if (this.props.element) console.warn('`element` prop is deprecated: instead pass editingElement or staticElement to InlineEdit component')
+        if (this.props.element) console.warn('`element` prop is deprecated: instead pass editingElement or staticElement to InlineEdit component');
     }
 
     static propTypes = {
@@ -39,7 +39,7 @@ export default class InlineEdit extends React.Component {
         style: React.PropTypes.object,
         editingElement: React.PropTypes.string,
         staticElement: React.PropTypes.string,
-        tabIndex: React.PropTypes.number
+        tabIndex: React.PropTypes.number,
     };
 
     startEditing() {
@@ -47,7 +47,7 @@ export default class InlineEdit extends React.Component {
     }
 
     finishEditing() {
-        if(this.isInputValid(this.state.text) && this.props.text != this.state.text){
+        if (this.isInputValid(this.state.text) && this.props.text != this.state.text){
             this.commitEditing();
         } else if (this.props.text === this.state.text || !this.isInputValid(this.state.text)) {
             this.cancelEditing();
@@ -70,7 +70,7 @@ export default class InlineEdit extends React.Component {
     }
 
     keyDown(event) {
-        if(event.keyCode === 13) {
+        if (event.keyCode === 13) {
             this.finishEditing();
         } else if (event.keyCode === 27) {
             this.cancelEditing();
@@ -80,47 +80,47 @@ export default class InlineEdit extends React.Component {
     textChanged(event) {
         this.setState({
             text: event.target.value.trim()
-        })
+        });
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.text !== this.state.text) {
+        if (nextProps.text !== this.state.text) {
             this.setState({ text: nextProps.text });
         }
     }
 
     componentDidUpdate(prevProps, prevState) {
-        var inputElem = ReactDOM.findDOMNode(this.refs.input);
+        let inputElem = ReactDOM.findDOMNode(this.refs.input);
         if (this.state.editing && !prevState.editing) {
             inputElem.focus();
-            SelectInputText(inputElem);
+            selectInputText(inputElem);
         } else if (this.state.editing && prevProps.text != this.props.text) {
             this.finishEditing();
         }
     }
 
     render() {
-        if(!this.state.editing) {
-          const Element = this.props.element || this.props.staticElement || 'span';
-          return <Element
-            className={this.props.className}
-            onClick={this.startEditing}
-            tabIndex={this.props.tabIndex || 0}
-            style={this.props.style} >
-              {this.state.text || this.props.placeholder}
-          </Element>
+        if (!this.state.editing) {
+            const Element = this.props.element || this.props.staticElement || 'span';
+            return <Element
+                className={this.props.className}
+                onClick={this.startEditing}
+                tabIndex={this.props.tabIndex || 0}
+                style={this.props.style} >
+                {this.state.text || this.props.placeholder}
+            </Element>;
         } else {
             const Element = this.props.element || this.props.editingElement || 'input';
             return <Element
-              onKeyDown={this.keyDown}
-              onBlur={this.finishEditing}
-              className={this.props.activeClassName}
-              placeholder={this.props.placeholder}
-              defaultValue={this.state.text}
-              onReturn={this.finishEditing}
-              onChange={this.textChanged}
-              style={this.props.style}
-              ref="input" />
+                onKeyDown={this.keyDown}
+                onBlur={this.finishEditing}
+                className={this.props.activeClassName}
+                placeholder={this.props.placeholder}
+                defaultValue={this.state.text}
+                onReturn={this.finishEditing}
+                onChange={this.textChanged}
+                style={this.props.style}
+                ref="input" />;
         }
     }
 }
