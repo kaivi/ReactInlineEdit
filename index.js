@@ -106,18 +106,18 @@ var InlineEdit = function (_React$Component) {
         key: 'render',
         value: function render() {
             if (!this.state.editing) {
-                var Element = this.props.element || this.props.staticElement || 'span';
+                var Element = this.props.element || this.props.staticElement;
                 return _react2.default.createElement(
                     Element,
                     {
                         className: this.props.className,
                         onClick: this.startEditing,
-                        tabIndex: this.props.tabIndex || 0,
+                        tabIndex: this.props.tabIndex,
                         style: this.props.style },
                     this.state.text || this.props.placeholder
                 );
             } else {
-                var Element = this.props.element || this.props.editingElement || 'input';
+                var Element = this.props.element || this.props.editingElement;
                 return _react2.default.createElement(Element, {
                     onKeyDown: this.keyDown,
                     onBlur: this.finishEditing,

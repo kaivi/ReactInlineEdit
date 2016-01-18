@@ -104,16 +104,16 @@ export default class InlineEdit extends React.Component {
 
     render() {
         if (!this.state.editing) {
-            const Element = this.props.element || this.props.staticElement || 'span';
+            const Element = this.props.element || this.props.staticElement;
             return <Element
                 className={this.props.className}
                 onClick={this.startEditing}
-                tabIndex={this.props.tabIndex || 0}
+                tabIndex={this.props.tabIndex}
                 style={this.props.style} >
                 {this.state.text || this.props.placeholder}
             </Element>;
         } else {
-            const Element = this.props.element || this.props.editingElement || 'input';
+            const Element = this.props.element || this.props.editingElement;
             return <Element
                 onKeyDown={this.keyDown}
                 onBlur={this.finishEditing}
