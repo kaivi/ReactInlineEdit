@@ -1,3 +1,19 @@
+1.0.5 / 2016-01-19
+==================
+
+* Merged PR [#9](https://github.com/kaivi/ReactInlineEdit/pull/9)
+  - consistent style (and basic lint stuff)
+  - spacing
+  - spaces after if
+  - let instead of var
+  - dangling commas
+  - lower case `functionName`
+  - life-cycle methods before others, followed by render.
+  - class properties (since stage 0 is being utilized)
+  - other initialization stuff in `componentWillMount` as opposed to `constructor`
+
+* Upgraded peerDependency to React 0.14.6 PR [#10](https://github.com/kaivi/ReactInlineEdit/pull/10)
+
 1.0.4 / 2016-01-18
 ==================
 
