@@ -46,7 +46,7 @@ export default class InlineEdit extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.text !== this.state.text) {
+        if (nextProps.text !== this.props.text) {
             this.setState({ text: nextProps.text });
         }
     }
