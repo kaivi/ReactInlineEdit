@@ -61,7 +61,10 @@ export default class InlineEdit extends React.Component {
         }
     }
 
-    startEditing = () => {
+    startEditing = (e) => {
+        if (this.props.stopPropagation) {
+            e.stopPropagation()
+        }
         this.setState({editing: true, text: this.props.text});
     };
 
@@ -82,6 +85,12 @@ export default class InlineEdit extends React.Component {
         let newProp = {};
         newProp[this.props.paramName] = this.state.text;
         this.props.change(newProp);
+    };
+
+    clickWhenEditing = (e) => {
+        if (this.props.stopPropagation) {
+            e.stopPropagation();
+        }
     };
 
     isInputValid = (text) => {
@@ -115,6 +124,7 @@ export default class InlineEdit extends React.Component {
         } else {
             const Element = this.props.element || this.props.editingElement;
             return <Element
+                onClick={this.clickWhenEditing}
                 onKeyDown={this.keyDown}
                 onBlur={this.finishEditing}
                 className={this.props.activeClassName}

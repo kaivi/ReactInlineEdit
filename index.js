@@ -45,7 +45,10 @@ var InlineEdit = function (_React$Component) {
             text: _this.props.text,
             minLength: _this.props.minLength,
             maxLength: _this.props.maxLength
-        }, _this.startEditing = function () {
+        }, _this.startEditing = function (e) {
+            if (_this.props.stopPropagation) {
+                e.stopPropagation();
+            }
             _this.setState({ editing: true, text: _this.props.text });
         }, _this.finishEditing = function () {
             if (_this.isInputValid(_this.state.text) && _this.props.text != _this.state.text) {
@@ -60,6 +63,10 @@ var InlineEdit = function (_React$Component) {
             var newProp = {};
             newProp[_this.props.paramName] = _this.state.text;
             _this.props.change(newProp);
+        }, _this.clickWhenEditing = function (e) {
+            if (_this.props.stopPropagation) {
+                e.stopPropagation();
+            }
         }, _this.isInputValid = function (text) {
             return text.length >= _this.state.minLength && text.length <= _this.state.maxLength;
         }, _this.keyDown = function (event) {
@@ -119,6 +126,7 @@ var InlineEdit = function (_React$Component) {
             } else {
                 var Element = this.props.element || this.props.editingElement;
                 return _react2.default.createElement(Element, {
+                    onClick: this.clickWhenEditing,
                     onKeyDown: this.keyDown,
                     onBlur: this.finishEditing,
                     className: this.props.activeClassName,
