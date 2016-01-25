@@ -87,7 +87,7 @@ var InlineEdit = function (_React$Component) {
     }, {
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
-            if (nextProps.text !== this.state.text) {
+            if (nextProps.text !== this.props.text) {
                 this.setState({ text: nextProps.text });
             }
         }
