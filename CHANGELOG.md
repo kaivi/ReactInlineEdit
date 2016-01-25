@@ -1,3 +1,9 @@
+1.0.6 / 2016-01-25
+==================
+
+* Merged PR [#11](https://github.com/kaivi/ReactInlineEdit/pull/11)
+  - fixed a bug introduced in [#6](https://github.com/kaivi/ReactInlineEdit/pull/6)
+
 1.0.5 / 2016-01-19
 ==================
 
