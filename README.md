@@ -26,6 +26,7 @@ Watch a [demo](https://cdn.rawgit.com/kaivi/ReactInlineEdit/master/demo/index.ht
 - `editingElement`:_string_ element name to use when in edit mode (DOM must have `value` property) **default** `input`
 - `staticElement`:_string_ element name for displaying data **default** `span`
 - `tabIndex`:_number_ tab index used for focusing with TAB key **default** `0`
+- `stopPropagation`:_boolean_ If true, the event onClick will not be further propagated.
 
 ### Usage example
 ```javascript
