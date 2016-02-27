@@ -1,6 +1,6 @@
 # Inline Edit Component for React
 
-Before you continue, check out a successor to this repo: [React Inline Edit Kit](http://kaivi.github.io/riek/). It will be published by the end of february 2016.
+Before you continue, check out a successor to this repo: [React Inline Edit Kit](http://kaivi.github.io/riek/). It is more functional, and will be maintained in future.
 
 This is a simple React component for in-place text editing. It turns into an `<input />` when focused, and tries to validate and save input on <kbd>Enter</kbd> or `blur`. <kbd>Esc</kbd> works as well for cancelling.
 
