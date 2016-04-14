@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/kaivi/ReactInlineEdit#readme",
   "peerDependencies": {
-    "react": "^0.14.6"
+    "react": "^0.14.6 || 15.x.x"
   },
   "devDependencies": {
     "babel-cli": "^6.4.0",
