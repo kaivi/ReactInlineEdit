@@ -148,6 +148,10 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
 	var _createClass = function () {
 	    function defineProperties(target, props) {
 	        for (var i = 0; i < props.length; i++) {
@@ -157,10 +161,6 @@
 	        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
 	    };
 	}();
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
 
 	var _react = __webpack_require__(2);
 
@@ -290,8 +290,13 @@
 	                    tabIndex: this.props.tabIndex,
 	                    style: this.props.style }, this.state.text || this.props.placeholder);
 	            } else {
+<<<<<<< HEAD
+	                var _Element = this.props.element || this.props.editingElement;
+	                return _react2.default.createElement(_Element, {
+=======
 	                var Element = this.props.element || this.props.editingElement;
 	                return _react2.default.createElement(Element, {
+>>>>>>> b141e64... Add stopPropagation option
 	                    onClick: this.clickWhenEditing,
 	                    onKeyDown: this.keyDown,
 	                    onBlur: this.finishEditing,

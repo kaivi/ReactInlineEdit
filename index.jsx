@@ -20,6 +20,7 @@ export default class InlineEdit extends React.Component {
         editingElement: React.PropTypes.string,
         staticElement: React.PropTypes.string,
         tabIndex: React.PropTypes.number,
+        isDisabled: React.PropTypes.bool,
     };
 
     static defaultProps = {
@@ -28,6 +29,7 @@ export default class InlineEdit extends React.Component {
         editingElement: 'input',
         staticElement: 'span',
         tabIndex: 0,
+        isDisabled: false
     };
 
     state = {
@@ -112,7 +114,14 @@ export default class InlineEdit extends React.Component {
     };
 
     render() {
-        if (!this.state.editing) {
+        if (this.props.isDisabled) {
+          const Element = this.props.element || this.props.staticElement;
+          return <Element
+              className={this.props.className}
+              style={this.props.style} >
+              {this.state.text || this.props.placeholder}
+          </Element>;
+        } else if (!this.state.editing) {
             const Element = this.props.element || this.props.staticElement;
             return <Element
                 className={this.props.className}
