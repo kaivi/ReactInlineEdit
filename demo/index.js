@@ -148,10 +148,6 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
 	var _createClass = function () {
 	    function defineProperties(target, props) {
 	        for (var i = 0; i < props.length; i++) {
@@ -161,6 +157,10 @@
 	        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
 	    };
 	}();
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 
 	var _react = __webpack_require__(2);
 
@@ -282,7 +282,12 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            if (!this.state.editing) {
+	            if (this.props.isDisabled) {
+	                var Element = this.props.element || this.props.staticElement;
+	                return _react2.default.createElement(Element, {
+	                    className: this.props.className,
+	                    style: this.props.style }, this.state.text || this.props.placeholder);
+	            } else if (!this.state.editing) {
 	                var Element = this.props.element || this.props.staticElement;
 	                return _react2.default.createElement(Element, {
 	                    className: this.props.className,
@@ -290,13 +295,8 @@
 	                    tabIndex: this.props.tabIndex,
 	                    style: this.props.style }, this.state.text || this.props.placeholder);
 	            } else {
-<<<<<<< HEAD
-	                var _Element = this.props.element || this.props.editingElement;
-	                return _react2.default.createElement(_Element, {
-=======
 	                var Element = this.props.element || this.props.editingElement;
 	                return _react2.default.createElement(Element, {
->>>>>>> b141e64... Add stopPropagation option
 	                    onClick: this.clickWhenEditing,
 	                    onKeyDown: this.keyDown,
 	                    onBlur: this.finishEditing,
@@ -327,14 +327,16 @@
 	    style: _react2.default.PropTypes.object,
 	    editingElement: _react2.default.PropTypes.string,
 	    staticElement: _react2.default.PropTypes.string,
-	    tabIndex: _react2.default.PropTypes.number
+	    tabIndex: _react2.default.PropTypes.number,
+	    isDisabled: _react2.default.PropTypes.bool
 	};
 	InlineEdit.defaultProps = {
 	    minLength: 1,
 	    maxLength: 256,
 	    editingElement: 'input',
 	    staticElement: 'span',
-	    tabIndex: 0
+	    tabIndex: 0,
+	    isDisabled: false
 	};
 	exports.default = InlineEdit;
 
