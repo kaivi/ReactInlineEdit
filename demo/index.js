@@ -346,7 +346,8 @@
 	    editingElement: 'input',
 	    staticElement: 'span',
 	    tabIndex: 0,
-	    isDisabled: false
+	    isDisabled: false,
+	    editing: false
 	};
 	exports.default = InlineEdit;
 

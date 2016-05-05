@@ -30,7 +30,8 @@ export default class InlineEdit extends React.Component {
         editingElement: 'input',
         staticElement: 'span',
         tabIndex: 0,
-        isDisabled: false
+        isDisabled: false,
+        editing: false
     };
 
     state = {
