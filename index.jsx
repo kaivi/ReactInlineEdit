@@ -21,6 +21,7 @@ export default class InlineEdit extends React.Component {
         staticElement: React.PropTypes.string,
         tabIndex: React.PropTypes.number,
         isDisabled: React.PropTypes.bool,
+        editing: React.PropTypes.bool
     };
 
     static defaultProps = {
@@ -33,7 +34,7 @@ export default class InlineEdit extends React.Component {
     };
 
     state = {
-        editing: false,
+        editing: this.props.editing,
         text: this.props.text,
         minLength: this.props.minLength,
         maxLength: this.props.maxLength,
@@ -48,8 +49,17 @@ export default class InlineEdit extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.text !== this.props.text) {
-            this.setState({ text: nextProps.text });
+        const isTextChanged = (nextProps.text !== this.props.text);
+        const isEditingChanged = (nextProps.editing !== this.props.editing);
+        let nextState = {};
+        if (isTextChanged) {
+            nextState.text = nextProps.text;
+        }
+        if (isEditingChanged) {
+            nextState.editing = nextProps.editing;
+        }
+        if (isTextChanged || isEditingChanged) {
+            this.setState(nextState);
         }
     }
 
