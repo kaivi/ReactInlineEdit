@@ -148,6 +148,10 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
 	var _createClass = function () {
 	    function defineProperties(target, props) {
 	        for (var i = 0; i < props.length; i++) {
@@ -157,10 +161,6 @@
 	        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
 	    };
 	}();
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
 
 	var _react = __webpack_require__(2);
 
@@ -211,7 +211,7 @@
 	        }
 
 	        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(InlineEdit)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
-	            editing: false,
+	            editing: _this.props.editing,
 	            text: _this.props.text,
 	            minLength: _this.props.minLength,
 	            maxLength: _this.props.maxLength
@@ -264,8 +264,17 @@
 	    }, {
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
-	            if (nextProps.text !== this.props.text) {
-	                this.setState({ text: nextProps.text });
+	            var isTextChanged = nextProps.text !== this.props.text;
+	            var isEditingChanged = nextProps.editing !== this.props.editing;
+	            var nextState = {};
+	            if (isTextChanged) {
+	                nextState.text = nextProps.text;
+	            }
+	            if (isEditingChanged) {
+	                nextState.editing = nextProps.editing;
+	            }
+	            if (isTextChanged || isEditingChanged) {
+	                this.setState(nextState);
 	            }
 	        }
 	    }, {
@@ -288,15 +297,15 @@
 	                    className: this.props.className,
 	                    style: this.props.style }, this.state.text || this.props.placeholder);
 	            } else if (!this.state.editing) {
-	                var Element = this.props.element || this.props.staticElement;
-	                return _react2.default.createElement(Element, {
+	                var _Element = this.props.element || this.props.staticElement;
+	                return _react2.default.createElement(_Element, {
 	                    className: this.props.className,
 	                    onClick: this.startEditing,
 	                    tabIndex: this.props.tabIndex,
 	                    style: this.props.style }, this.state.text || this.props.placeholder);
 	            } else {
-	                var Element = this.props.element || this.props.editingElement;
-	                return _react2.default.createElement(Element, {
+	                var _Element2 = this.props.element || this.props.editingElement;
+	                return _react2.default.createElement(_Element2, {
 	                    onClick: this.clickWhenEditing,
 	                    onKeyDown: this.keyDown,
 	                    onBlur: this.finishEditing,
@@ -328,7 +337,8 @@
 	    editingElement: _react2.default.PropTypes.string,
 	    staticElement: _react2.default.PropTypes.string,
 	    tabIndex: _react2.default.PropTypes.number,
-	    isDisabled: _react2.default.PropTypes.bool
+	    isDisabled: _react2.default.PropTypes.bool,
+	    editing: _react2.default.PropTypes.bool
 	};
 	InlineEdit.defaultProps = {
 	    minLength: 1,
@@ -336,7 +346,8 @@
 	    editingElement: 'input',
 	    staticElement: 'span',
 	    tabIndex: 0,
-	    isDisabled: false
+	    isDisabled: false,
+	    editing: false
 	};
 	exports.default = InlineEdit;
 
