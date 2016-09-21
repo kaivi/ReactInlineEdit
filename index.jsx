@@ -150,7 +150,6 @@ export default class InlineEdit extends React.Component {
                 className={this.props.activeClassName}
                 placeholder={this.props.placeholder}
                 defaultValue={this.state.text}
-                onReturn={this.finishEditing}
                 onChange={this.textChanged}
                 style={this.props.style}
                 ref="input" />;
