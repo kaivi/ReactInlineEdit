@@ -76,7 +76,7 @@
 	  function MyParentComponent(props) {
 	    _classCallCheck(this, MyParentComponent);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MyParentComponent).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (MyParentComponent.__proto__ || Object.getPrototypeOf(MyParentComponent)).call(this, props));
 
 	    _this.dataChanged = _this.dataChanged.bind(_this);
 	    _this.state = {
@@ -146,7 +146,7 @@
 
 	'use strict';
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -200,7 +200,7 @@
 	    _inherits(InlineEdit, _React$Component);
 
 	    function InlineEdit() {
-	        var _Object$getPrototypeO;
+	        var _ref;
 
 	        var _temp, _this, _ret;
 
@@ -210,7 +210,7 @@
 	            args[_key] = arguments[_key];
 	        }
 
-	        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(InlineEdit)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+	        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = InlineEdit.__proto__ || Object.getPrototypeOf(InlineEdit)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
 	            editing: _this.props.editing,
 	            text: _this.props.text,
 	            minLength: _this.props.minLength,
@@ -312,7 +312,6 @@
 	                    className: this.props.activeClassName,
 	                    placeholder: this.props.placeholder,
 	                    defaultValue: this.state.text,
-	                    onReturn: this.finishEditing,
 	                    onChange: this.textChanged,
 	                    style: this.props.style,
 	                    ref: 'input' });
