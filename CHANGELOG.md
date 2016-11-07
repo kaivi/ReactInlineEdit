@@ -1,3 +1,8 @@
+
+1.0.7 / 2016-09-26
+==================
+* Merged pr[26](https://github.com/kaivi/ReactInlineEdit/pull/26)
+
 1.0.7 / 2016-04-28
 ==================
 
