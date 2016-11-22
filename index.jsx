@@ -50,7 +50,7 @@ export default class InlineEdit extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const isTextChanged = (nextProps.text !== this.props.text);
+        const isTextChanged = (this.state.text !== this.props.text);
         const isEditingChanged = (nextProps.editing !== this.props.editing);
         let nextState = {};
         if (isTextChanged) {
