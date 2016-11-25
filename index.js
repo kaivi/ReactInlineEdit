@@ -153,6 +153,7 @@ var InlineEdit = function (_React$Component) {
                     onReturn: this.finishEditing,
                     onChange: this.textChanged,
                     style: this.props.style,
+                    size: this.props.text.length + 2,
                     ref: 'input' });
             }
         }
@@ -172,6 +173,7 @@ InlineEdit.propTypes = {
     maxLength: _react2.default.PropTypes.number,
     validate: _react2.default.PropTypes.func,
     style: _react2.default.PropTypes.object,
+    size: _react2.default.PropTypes.number,
     editingElement: _react2.default.PropTypes.string,
     staticElement: _react2.default.PropTypes.string,
     tabIndex: _react2.default.PropTypes.number,
