@@ -21,7 +21,8 @@ export default class InlineEdit extends React.Component {
         staticElement: React.PropTypes.string,
         tabIndex: React.PropTypes.number,
         isDisabled: React.PropTypes.bool,
-        editing: React.PropTypes.bool
+        editing: React.PropTypes.bool,
+        onFinishEditing: React.PropTypes.func
     };
 
     static defaultProps = {
@@ -84,6 +85,9 @@ export default class InlineEdit extends React.Component {
     finishEditing = () => {
         if (this.isInputValid(this.state.text) && this.props.text != this.state.text){
             this.commitEditing();
+            if (this.props.onFinishEditing) {
+                this.props.onFinishEditing();
+            }
         } else if (this.props.text === this.state.text || !this.isInputValid(this.state.text)) {
             this.cancelEditing();
         }
