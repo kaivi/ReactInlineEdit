@@ -10,6 +10,7 @@ export default class InlineEdit extends React.Component {
         text: React.PropTypes.string.isRequired,
         paramName: React.PropTypes.string.isRequired,
         change: React.PropTypes.func.isRequired,
+        validationFailure: React.PropTypes.func,
         placeholder: React.PropTypes.string,
         className: React.PropTypes.string,
         activeClassName: React.PropTypes.string,
@@ -84,7 +85,12 @@ export default class InlineEdit extends React.Component {
     finishEditing = () => {
         if (this.isInputValid(this.state.text) && this.props.text != this.state.text){
             this.commitEditing();
-        } else if (this.props.text === this.state.text || !this.isInputValid(this.state.text)) {
+        } else if (!this.isInputValid(this.state.text)) {
+            this.cancelEditing();
+            if (this.props.validationFailure) {
+               this.props.validationFailure(this.state.text)
+            }
+        } else if (this.props.text === this.state.text) {
             this.cancelEditing();
         }
     };

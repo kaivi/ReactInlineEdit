@@ -21,6 +21,7 @@ Watch a [demo](http://htmlpreview.github.io/?https://github.com/kaivi/ReactInlin
 - `className`:_string_ CSS class name
 - `activeClassName`:_string_ CSS class replacement for when in edit mode
 - `validate`:_function_ boolean function for custom validation, using this overrides the two props below
+- `validationFailure`:`function` function to call when validation fails, it will receive `{value}`
 - `minLength`:_number_ minimum text length, **default** `1`
 - `maxLength`:_number_ maximum text length, **default** `256`
 - `editingElement`:_string_ element name to use when in edit mode (DOM must have `value` property) **default** `input`

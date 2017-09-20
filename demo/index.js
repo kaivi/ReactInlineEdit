@@ -42,7 +42,7 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -76,7 +76,7 @@
 	  function MyParentComponent(props) {
 	    _classCallCheck(this, MyParentComponent);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MyParentComponent).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (MyParentComponent.__proto__ || Object.getPrototypeOf(MyParentComponent)).call(this, props));
 
 	    _this.dataChanged = _this.dataChanged.bind(_this);
 	    _this.state = {
@@ -140,13 +140,13 @@
 
 	_reactDom2.default.render(_react2.default.createElement(MyParentComponent, null), document.getElementById('app'));
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -200,7 +200,7 @@
 	    _inherits(InlineEdit, _React$Component);
 
 	    function InlineEdit() {
-	        var _Object$getPrototypeO;
+	        var _ref;
 
 	        var _temp, _this, _ret;
 
@@ -210,7 +210,7 @@
 	            args[_key] = arguments[_key];
 	        }
 
-	        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(InlineEdit)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+	        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = InlineEdit.__proto__ || Object.getPrototypeOf(InlineEdit)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
 	            editing: _this.props.editing,
 	            text: _this.props.text,
 	            minLength: _this.props.minLength,
@@ -223,7 +223,12 @@
 	        }, _this.finishEditing = function () {
 	            if (_this.isInputValid(_this.state.text) && _this.props.text != _this.state.text) {
 	                _this.commitEditing();
-	            } else if (_this.props.text === _this.state.text || !_this.isInputValid(_this.state.text)) {
+	            } else if (!_this.isInputValid(_this.state.text)) {
+	                _this.cancelEditing();
+	                if (_this.props.validationFailure) {
+	                    _this.props.validationFailure(_this.state.text);
+	                }
+	            } else if (_this.props.text === _this.state.text) {
 	                _this.cancelEditing();
 	            }
 	        }, _this.cancelEditing = function () {
@@ -312,7 +317,6 @@
 	                    className: this.props.activeClassName,
 	                    placeholder: this.props.placeholder,
 	                    defaultValue: this.state.text,
-	                    onReturn: this.finishEditing,
 	                    onChange: this.textChanged,
 	                    style: this.props.style,
 	                    ref: 'input' });
@@ -327,6 +331,7 @@
 	    text: _react2.default.PropTypes.string.isRequired,
 	    paramName: _react2.default.PropTypes.string.isRequired,
 	    change: _react2.default.PropTypes.func.isRequired,
+	    validationFailure: _react2.default.PropTypes.func,
 	    placeholder: _react2.default.PropTypes.string,
 	    className: _react2.default.PropTypes.string,
 	    activeClassName: _react2.default.PropTypes.string,
@@ -351,17 +356,17 @@
 	};
 	exports.default = InlineEdit;
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = React;
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = ReactDOM;
 
-/***/ }
+/***/ })
 /******/ ]);

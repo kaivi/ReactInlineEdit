@@ -30,7 +30,7 @@ var InlineEdit = function (_React$Component) {
     _inherits(InlineEdit, _React$Component);
 
     function InlineEdit() {
-        var _Object$getPrototypeO;
+        var _ref;
 
         var _temp, _this, _ret;
 
@@ -40,7 +40,7 @@ var InlineEdit = function (_React$Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(InlineEdit)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = InlineEdit.__proto__ || Object.getPrototypeOf(InlineEdit)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
             editing: _this.props.editing,
             text: _this.props.text,
             minLength: _this.props.minLength,
@@ -53,7 +53,12 @@ var InlineEdit = function (_React$Component) {
         }, _this.finishEditing = function () {
             if (_this.isInputValid(_this.state.text) && _this.props.text != _this.state.text) {
                 _this.commitEditing();
-            } else if (_this.props.text === _this.state.text || !_this.isInputValid(_this.state.text)) {
+            } else if (!_this.isInputValid(_this.state.text)) {
+                _this.cancelEditing();
+                if (_this.props.validationFailure) {
+                    _this.props.validationFailure(_this.state.text);
+                }
+            } else if (_this.props.text === _this.state.text) {
                 _this.cancelEditing();
             }
         }, _this.cancelEditing = function () {
@@ -150,7 +155,6 @@ var InlineEdit = function (_React$Component) {
                     className: this.props.activeClassName,
                     placeholder: this.props.placeholder,
                     defaultValue: this.state.text,
-                    onReturn: this.finishEditing,
                     onChange: this.textChanged,
                     style: this.props.style,
                     ref: 'input' });
@@ -165,6 +169,7 @@ InlineEdit.propTypes = {
     text: _react2.default.PropTypes.string.isRequired,
     paramName: _react2.default.PropTypes.string.isRequired,
     change: _react2.default.PropTypes.func.isRequired,
+    validationFailure: _react2.default.PropTypes.func,
     placeholder: _react2.default.PropTypes.string,
     className: _react2.default.PropTypes.string,
     activeClassName: _react2.default.PropTypes.string,
