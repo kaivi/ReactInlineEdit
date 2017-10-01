@@ -6,6 +6,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -166,22 +170,22 @@ var InlineEdit = function (_React$Component) {
 }(_react2.default.Component);
 
 InlineEdit.propTypes = {
-    text: _react2.default.PropTypes.string.isRequired,
-    paramName: _react2.default.PropTypes.string.isRequired,
-    change: _react2.default.PropTypes.func.isRequired,
-    validationFailure: _react2.default.PropTypes.func,
-    placeholder: _react2.default.PropTypes.string,
-    className: _react2.default.PropTypes.string,
-    activeClassName: _react2.default.PropTypes.string,
-    minLength: _react2.default.PropTypes.number,
-    maxLength: _react2.default.PropTypes.number,
-    validate: _react2.default.PropTypes.func,
-    style: _react2.default.PropTypes.object,
-    editingElement: _react2.default.PropTypes.string,
-    staticElement: _react2.default.PropTypes.string,
-    tabIndex: _react2.default.PropTypes.number,
-    isDisabled: _react2.default.PropTypes.bool,
-    editing: _react2.default.PropTypes.bool
+    text: _propTypes2.default.string.isRequired,
+    paramName: _propTypes2.default.string.isRequired,
+    change: _propTypes2.default.func.isRequired,
+    validationFailure: _propTypes2.default.func,
+    placeholder: _propTypes2.default.string,
+    className: _propTypes2.default.string,
+    activeClassName: _propTypes2.default.string,
+    minLength: _propTypes2.default.number,
+    maxLength: _propTypes2.default.number,
+    validate: _propTypes2.default.func,
+    style: _propTypes2.default.object,
+    editingElement: _propTypes2.default.string,
+    staticElement: _propTypes2.default.string,
+    tabIndex: _propTypes2.default.number,
+    isDisabled: _propTypes2.default.bool,
+    editing: _propTypes2.default.bool
 };
 InlineEdit.defaultProps = {
     minLength: 1,
