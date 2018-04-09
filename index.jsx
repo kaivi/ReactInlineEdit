@@ -23,7 +23,8 @@ export default class InlineEdit extends React.Component {
         staticElement: PropTypes.string,
         tabIndex: PropTypes.number,
         isDisabled: PropTypes.bool,
-        editing: PropTypes.bool
+        editing: PropTypes.bool,
+        ref: PropTypes.any
     };
 
     static defaultProps = {
@@ -48,6 +49,14 @@ export default class InlineEdit extends React.Component {
         // Warn about deprecated elements
         if (this.props.element) {
             console.warn('`element` prop is deprecated: instead pass editingElement or staticElement to InlineEdit component');
+        }
+
+        if (this.props.ref) {
+            this.props.ref({
+                focus: () => {
+                    this.setState({editing: true, text: this.props.text});
+                }
+            })
         }
     }
 

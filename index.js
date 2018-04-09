@@ -94,10 +94,20 @@ var InlineEdit = function (_React$Component) {
     _createClass(InlineEdit, [{
         key: 'componentWillMount',
         value: function componentWillMount() {
+            var _this2 = this;
+
             this.isInputValid = this.props.validate || this.isInputValid;
             // Warn about deprecated elements
             if (this.props.element) {
                 console.warn('`element` prop is deprecated: instead pass editingElement or staticElement to InlineEdit component');
+            }
+
+            if (this.props.ref) {
+                this.props.ref({
+                    focus: function focus() {
+                        _this2.setState({ editing: true, text: _this2.props.text });
+                    }
+                });
             }
         }
     }, {
@@ -185,7 +195,8 @@ InlineEdit.propTypes = {
     staticElement: _propTypes2.default.string,
     tabIndex: _propTypes2.default.number,
     isDisabled: _propTypes2.default.bool,
-    editing: _propTypes2.default.bool
+    editing: _propTypes2.default.bool,
+    ref: _propTypes2.default.any
 };
 InlineEdit.defaultProps = {
     minLength: 1,
