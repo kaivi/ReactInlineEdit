@@ -76,7 +76,7 @@ export default class InlineEdit extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        let inputElem = ReactDOM.findDOMNode(this.refs.input);
+        let inputElem = ReactDOM.findDOMNode(this.inputRef);
         if (this.state.editing && !prevState.editing) {
             inputElem.focus();
             selectInputText(inputElem);
@@ -168,7 +168,7 @@ export default class InlineEdit extends React.Component {
                 defaultValue={this.state.text}
                 onChange={this.textChanged}
                 style={this.props.style}
-                ref="input" />;
+                ref={input => this.inputRef = input} />;
         }
     }
 }

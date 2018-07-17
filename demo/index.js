@@ -299,7 +299,7 @@
 	    }, {
 	        key: 'componentDidUpdate',
 	        value: function componentDidUpdate(prevProps, prevState) {
-	            var inputElem = _reactDom2.default.findDOMNode(this.refs.input);
+	            var inputElem = _reactDom2.default.findDOMNode(this.inputRef);
 	            if (this.state.editing && !prevState.editing) {
 	                inputElem.focus();
 	                selectInputText(inputElem);
@@ -310,6 +310,8 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this3 = this;
+
 	            if (this.props.isDisabled) {
 	                var Element = this.props.element || this.props.staticElement;
 	                return _react2.default.createElement(Element, {
@@ -333,7 +335,9 @@
 	                    defaultValue: this.state.text,
 	                    onChange: this.textChanged,
 	                    style: this.props.style,
-	                    ref: 'input' });
+	                    ref: function ref(input) {
+	                        return _this3.inputRef = input;
+	                    } });
 	            }
 	        }
 	    }]);
