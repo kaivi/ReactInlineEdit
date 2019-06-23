@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -7,21 +8,23 @@ function selectInputText(element) {
 
 export default class InlineEdit extends React.Component {
     static propTypes = {
-        text: React.PropTypes.string.isRequired,
-        paramName: React.PropTypes.string.isRequired,
-        change: React.PropTypes.func.isRequired,
-        placeholder: React.PropTypes.string,
-        className: React.PropTypes.string,
-        activeClassName: React.PropTypes.string,
-        minLength: React.PropTypes.number,
-        maxLength: React.PropTypes.number,
-        validate: React.PropTypes.func,
-        style: React.PropTypes.object,
-        editingElement: React.PropTypes.string,
-        staticElement: React.PropTypes.string,
-        tabIndex: React.PropTypes.number,
-        isDisabled: React.PropTypes.bool,
-        editing: React.PropTypes.bool
+        text: PropTypes.string.isRequired,
+        paramName: PropTypes.string.isRequired,
+        change: PropTypes.func.isRequired,
+        validationFailure: PropTypes.func,
+        placeholder: PropTypes.string,
+        className: PropTypes.string,
+        activeClassName: PropTypes.string,
+        minLength: PropTypes.number,
+        maxLength: PropTypes.number,
+        validate: PropTypes.func,
+        style: PropTypes.object,
+        editingElement: PropTypes.string,
+        staticElement: PropTypes.string,
+        tabIndex: PropTypes.number,
+        isDisabled: PropTypes.bool,
+        editing: PropTypes.bool,
+        ref: PropTypes.any
     };
 
     static defaultProps = {
@@ -47,6 +50,14 @@ export default class InlineEdit extends React.Component {
         if (this.props.element) {
             console.warn('`element` prop is deprecated: instead pass editingElement or staticElement to InlineEdit component');
         }
+
+        if (this.props.ref) {
+            this.props.ref({
+                focus: () => {
+                    this.setState({editing: true, text: this.props.text});
+                }
+            })
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -65,7 +76,7 @@ export default class InlineEdit extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        let inputElem = ReactDOM.findDOMNode(this.refs.input);
+        let inputElem = ReactDOM.findDOMNode(this.inputRef);
         if (this.state.editing && !prevState.editing) {
             inputElem.focus();
             selectInputText(inputElem);
@@ -84,7 +95,12 @@ export default class InlineEdit extends React.Component {
     finishEditing = () => {
         if (this.isInputValid(this.state.text) && this.props.text != this.state.text){
             this.commitEditing();
-        } else if (this.props.text === this.state.text || !this.isInputValid(this.state.text)) {
+        } else if (!this.isInputValid(this.state.text)) {
+            this.cancelEditing();
+            if (this.props.validationFailure) {
+               this.props.validationFailure(this.state.text)
+            }
+        } else if (this.props.text === this.state.text) {
             this.cancelEditing();
         }
     };
@@ -152,7 +168,7 @@ export default class InlineEdit extends React.Component {
                 defaultValue={this.state.text}
                 onChange={this.textChanged}
                 style={this.props.style}
-                ref="input" />;
+                ref={input => this.inputRef = input} />;
         }
     }
 }

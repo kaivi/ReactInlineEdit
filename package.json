@@ -38,5 +38,10 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-1": "^6.3.13",
     "webpack": "^1.12.11"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.0",
+    "react": "16.8.6",
+    "react-dom": "16.8.6"
   }
 }
