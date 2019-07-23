@@ -14,6 +14,10 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30,7 +34,7 @@ var InlineEdit = function (_React$Component) {
     _inherits(InlineEdit, _React$Component);
 
     function InlineEdit() {
-        var _Object$getPrototypeO;
+        var _ref;
 
         var _temp, _this, _ret;
 
@@ -40,7 +44,7 @@ var InlineEdit = function (_React$Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(InlineEdit)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = InlineEdit.__proto__ || Object.getPrototypeOf(InlineEdit)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
             editing: _this.props.editing,
             text: _this.props.text,
             minLength: _this.props.minLength,
@@ -150,7 +154,6 @@ var InlineEdit = function (_React$Component) {
                     className: this.props.activeClassName,
                     placeholder: this.props.placeholder,
                     defaultValue: this.state.text,
-                    onReturn: this.finishEditing,
                     onChange: this.textChanged,
                     style: this.props.style,
                     ref: 'input' });
@@ -162,21 +165,21 @@ var InlineEdit = function (_React$Component) {
 }(_react2.default.Component);
 
 InlineEdit.propTypes = {
-    text: _react2.default.PropTypes.string.isRequired,
-    paramName: _react2.default.PropTypes.string.isRequired,
-    change: _react2.default.PropTypes.func.isRequired,
-    placeholder: _react2.default.PropTypes.string,
-    className: _react2.default.PropTypes.string,
-    activeClassName: _react2.default.PropTypes.string,
-    minLength: _react2.default.PropTypes.number,
-    maxLength: _react2.default.PropTypes.number,
-    validate: _react2.default.PropTypes.func,
-    style: _react2.default.PropTypes.object,
-    editingElement: _react2.default.PropTypes.string,
-    staticElement: _react2.default.PropTypes.string,
-    tabIndex: _react2.default.PropTypes.number,
-    isDisabled: _react2.default.PropTypes.bool,
-    editing: _react2.default.PropTypes.bool
+    text: _propTypes2.default.string.isRequired,
+    paramName: _propTypes2.default.string.isRequired,
+    change: _propTypes2.default.func.isRequired,
+    placeholder: _propTypes2.default.string,
+    className: _propTypes2.default.string,
+    activeClassName: _propTypes2.default.string,
+    minLength: _propTypes2.default.number,
+    maxLength: _propTypes2.default.number,
+    validate: _propTypes2.default.func,
+    style: _propTypes2.default.object,
+    editingElement: _propTypes2.default.string,
+    staticElement: _propTypes2.default.string,
+    tabIndex: _propTypes2.default.number,
+    isDisabled: _propTypes2.default.bool,
+    editing: _propTypes2.default.bool
 };
 InlineEdit.defaultProps = {
     minLength: 1,
