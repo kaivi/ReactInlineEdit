@@ -10,10 +10,11 @@
 /******/ 			return installedModules[moduleId].exports;
 
 /******/ 		// Create a new module (and put it into the cache)
+// 	new module create by own
 /******/ 		var module = installedModules[moduleId] = {
-/******/ 			exports: {},
-/******/ 			id: moduleId,
-/******/ 			loaded: false
+/******/ 			exports : {},
+/******/ 			id : moduleId,
+/******/ 			loaded : false
 /******/ 		};
 
 /******/ 		// Execute the module function
