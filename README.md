@@ -2,7 +2,7 @@
 
 Before you continue, check out a successor to this repo: [React Inline Edit Kit](https://github.com/kaivi/riek). It is more functional, and will be maintained in future.
 
-This is a simple React component for in-place text editing. It turns into an `<input />` when focused, and tries to validate and save input on <kbd>Enter</kbd> or `blur`. <kbd>Esc</kbd> works as well for cancelling.
+This is a simple React component for in-place text editing. It turns into an `<input />` when you focused, and tries to validate and save input on <kbd>Enter</kbd> or `blur`. <kbd>Esc</kbd> works as well for cancelling.
 
 ![Example animation gif](http://i.imgur.com/8vig5m1.gif)
 
